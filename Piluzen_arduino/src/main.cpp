@@ -29,7 +29,7 @@ void moveToPosition(float targetPosition)
     delayMicroseconds(500);
   }
 
-  // currentPosition = targetPosition;
+  currentPosition = targetPosition;
 }
 
 void setup()
@@ -42,10 +42,11 @@ void setup()
 
 void loop()
 {
-  moveToPosition(10);
-  // moveToPosition(270);
-  // delay(2000);
+  moveToPosition(270);
+  delay(2000);
 
-  // moveToPosition(90);
-  // delay(2000);
+  moveToPosition(360);
+  delay(2000);
+
+  currentPosition = 0;
 }
