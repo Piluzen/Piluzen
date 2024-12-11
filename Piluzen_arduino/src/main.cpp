@@ -1,34 +1,51 @@
 #include <Stepper.h>
 #include <Arduino.h>
 
-// Define the number of steps per revolution
-const int stepsPerRevolution = 3200; // Change based on your motor
+const int dirPin = 3;
+const int stepPin = 4;
 
-// Create a Stepper instance
-Stepper myStepper(stepsPerRevolution, 3, 4); // Pin 3 and 4 are stepper control pins
+const int stepsPerRevolution = 5400;
+float currentPosition = 0;
 
-int currentPosition = 0;
-
-void moveToPosition(int targetPosition)
+void moveToPosition(float targetPosition)
 {
-  int stepsToMove = targetPosition - currentPosition;
-  myStepper.step(stepsToMove);
-  currentPosition = targetPosition;
+  float stepsToMove = (targetPosition - currentPosition) * (stepsPerRevolution / 360.0);
+
+  if (stepsToMove > 0)
+  {
+    digitalWrite(dirPin, HIGH);
+  }
+  else
+  {
+    digitalWrite(dirPin, LOW);
+    stepsToMove = -stepsToMove;
+  }
+
+  for (int i = 0; i < stepsToMove; i++)
+  {
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(500);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(500);
+  }
+
+  // currentPosition = targetPosition;
 }
 
 void setup()
 {
-  // Set stepper speed in RPM
-  myStepper.setSpeed(60);
+  pinMode(dirPin, OUTPUT);
+  pinMode(stepPin, OUTPUT);
+
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  delay(1000);
+  moveToPosition(10);
+  // moveToPosition(270);
+  // delay(2000);
 
-  moveToPosition(-5000);
-  delay(1000);
-
-  moveToPosition(0);
-  // delay(1000);
+  // moveToPosition(90);
+  // delay(2000);
 }
