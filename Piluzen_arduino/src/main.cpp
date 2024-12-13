@@ -24,9 +24,9 @@ void moveToPosition(float targetPosition)
   for (int i = 0; i < stepsToMove; i++)
   {
     digitalWrite(stepPin, HIGH);
-    delayMicroseconds(500);
+    delayMicroseconds(700);
     digitalWrite(stepPin, LOW);
-    delayMicroseconds(500);
+    delayMicroseconds(400);
   }
 
   currentPosition = targetPosition;
@@ -42,11 +42,13 @@ void setup()
 
 void loop()
 {
+  // moveToPosition(-5);
+  delay(10000);
   moveToPosition(270);
-  delay(2000);
+  delay(5000);
 
   moveToPosition(360);
-  delay(2000);
+  delay(5000);
 
   currentPosition = 0;
 }
