@@ -42,8 +42,15 @@ void setup()
 
 void loop()
 {
-  // moveToPosition(-5);
-  delay(10000);
+  // while (true)
+  // {
+    // moveToPosition(-5);
+  // }
+  delay(3000);
+
+  moveToPosition(330);
+  delay(1000);
+
   moveToPosition(270);
   delay(5000);
 
